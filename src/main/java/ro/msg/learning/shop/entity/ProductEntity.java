@@ -3,6 +3,7 @@ package ro.msg.learning.shop.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -10,11 +11,11 @@ import java.util.Set;
 @Entity
 @Table(name = "products")
 @Data @NoArgsConstructor @AllArgsConstructor
-public class ProductEntity extends BaseEntity
+public class ProductEntity extends BaseEntity implements Serializable
 {
-    @OneToMany(mappedBy = "product1")
+    @OneToMany(mappedBy = "product")
     private Set<StockEntity> stock;
-    @OneToMany(mappedBy = "product2")
+    @OneToMany(mappedBy = "product")
     private Set<OrderDetailEntity> orderD;
     private String name;
     private String description;

@@ -4,15 +4,14 @@ import jakarta.persistence.*;
 import lombok.*;
 import ro.msg.learning.shop.StockID;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "stock")
 @Data @NoArgsConstructor @AllArgsConstructor
 @IdClass(StockID.class)
-public class StockEntity
+public class StockEntity extends BaseEntity
 {
-    @ManyToOne @Id
-    private ProductEntity product1;
-    @ManyToOne @Id
-    private LocationEntity location;
     private int quantity;
+    @EmbeddedId @ManyToOne
+    private StockID stockID;
 }

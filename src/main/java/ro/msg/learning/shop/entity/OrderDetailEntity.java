@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "orderDetails")
 @Data @NoArgsConstructor @AllArgsConstructor
-public class OrderDetailEntity
+public class OrderDetailEntity extends BaseEntity
 {
     @ManyToOne
     private OrderEntity orders;
     @ManyToOne
-    private ProductEntity product2;
+    private ProductEntity product;
     @ManyToOne
     private LocationEntity shippedFrom;
     private int quantity;

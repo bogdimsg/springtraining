@@ -6,13 +6,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "locations")
 @Data @NoArgsConstructor @AllArgsConstructor
-public class LocationEntity extends BaseEntity
+public class LocationEntity extends BaseEntity implements Serializable
 {
     @OneToMany(mappedBy = "location")
     private Set<StockEntity> stock;
