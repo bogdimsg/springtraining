@@ -1,20 +1,17 @@
-package ro.msg.learning.shop;
+package ro.msg.learning.shop.entity.ids;
 
 import jakarta.persistence.Embeddable;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import ro.msg.learning.shop.entity.LocationEntity;
 import ro.msg.learning.shop.entity.ProductEntity;
 
-import java.io.Serializable;
-
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Embeddable
-public class StockID implements Serializable
+public class StockID
 {
+    @ManyToOne
     private ProductEntity product;
+    @ManyToOne
     private LocationEntity location;
 }

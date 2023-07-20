@@ -15,7 +15,7 @@ import java.util.Set;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class OrderEntity extends BaseEntity
 {
-    @OneToMany(mappedBy = "orders")
+    @OneToMany(mappedBy = "orderDId.orders")
     private Set<OrderDetailEntity> orderD;
     @ManyToOne
     private CustomerEntity customer;

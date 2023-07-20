@@ -13,9 +13,9 @@ import java.util.Set;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class ProductEntity extends BaseEntity implements Serializable
 {
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "stockID.product")
     private Set<StockEntity> stock;
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "orderDId.product")
     private Set<OrderDetailEntity> orderD;
     private String name;
     private String description;

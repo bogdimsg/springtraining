@@ -15,7 +15,7 @@ import java.util.Set;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class LocationEntity extends BaseEntity implements Serializable
 {
-    @OneToMany(mappedBy = "location")
+    @OneToMany(mappedBy = "stockID.location")
     private Set<StockEntity> stock;
     @OneToMany(mappedBy = "shippedFrom")
     private Set<OrderDetailEntity> orderD;
