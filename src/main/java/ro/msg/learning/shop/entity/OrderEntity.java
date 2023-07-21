@@ -25,4 +25,14 @@ public class OrderEntity extends BaseEntity
     private String city;
     private String county;
     private String street;
+
+    public OrderEntity(CustomerEntity customer, LocalDateTime createdAt, String country, String city, String county, String street)
+    {
+        this.customer = customer;
+        this.createdAt = createdAt;
+        this.country = country;
+        this.city = city;
+        this.county = county;
+        this.street = street;
+    }
 }

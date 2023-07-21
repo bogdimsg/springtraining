@@ -15,4 +15,10 @@ public class ProductCategoryEntity extends BaseEntity
     private Set<ProductEntity> product;
     private String name;
     private String description;
+
+    public ProductCategoryEntity(String name, String description)
+    {
+        this.name = name;
+        this.description = description;
+    }
 }

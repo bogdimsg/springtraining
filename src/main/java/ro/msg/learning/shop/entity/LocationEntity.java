@@ -25,4 +25,13 @@ public class LocationEntity extends BaseEntity implements Serializable
     private String city;
     private String county;
     private String street;
+
+    public LocationEntity(String name, String country, String city, String county, String street)
+    {
+        this.name = name;
+        this.country = country;
+        this.city = city;
+        this.county = county;
+        this.street = street;
+    }
 }

@@ -24,4 +24,14 @@ public class ProductEntity extends BaseEntity implements Serializable
     @ManyToOne
     private ProductCategoryEntity category;
     private String imageURL;
+
+    public ProductEntity(String name, String description, BigDecimal price, double weight, ProductCategoryEntity category, String imageURL)
+    {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.weight = weight;
+        this.category = category;
+        this.imageURL = imageURL;
+    }
 }
