@@ -24,20 +24,20 @@ public class OrderController
     private ProductServiceImpl product;
 
     @PostMapping
-    public ResponseEntity<Object> createProduct(@RequestBody OrderDTO orderDTO)
+    public ResponseEntity<Object> createOrder(@RequestBody OrderDTO orderDTO)
     {
         orderService.createOrder(OrderMapper.INSTANCE.toOrderEntity(orderDTO));
         return new ResponseEntity<>("Order is created successfully", HttpStatus.CREATED);
     }
 
     @GetMapping(value = {"/{id}", "/get/{id}"})
-    public ResponseEntity<Object> getProduct(@PathVariable("id") UUID id)
+    public ResponseEntity<Object> getOrder(@PathVariable("id") UUID id)
     {
         return new ResponseEntity<>(OrderMapper.INSTANCE.toOrderDTO(orderService.getOrder(id), product.getProduct(id)), HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<Object> getProducts()
+    public ResponseEntity<Object> getOrders()
     {
         Collection<OrderEntity> orders = orderService.getOrders();
         Collection<OrderDTO> ordersDTO = new ArrayList<>();
@@ -47,7 +47,7 @@ public class OrderController
     }
 
     @PutMapping(value = "/put/{id}")
-    public ResponseEntity<Object> updateProduct(@RequestBody OrderDTO orderDTO)
+    public ResponseEntity<Object> updateOrder(@RequestBody OrderDTO orderDTO)
     {
         orderService.updateOrder(OrderMapper.INSTANCE.toOrderEntity(orderDTO));
         return new ResponseEntity<>("Order is updated successfully", HttpStatus.OK);

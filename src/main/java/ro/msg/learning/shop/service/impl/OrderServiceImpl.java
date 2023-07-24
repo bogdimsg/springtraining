@@ -27,7 +27,8 @@ public class OrderServiceImpl implements OrderService
         // updating the quantity in the stock
         for (OrderDetailEntity orderDetailEntity : order.getOrderDetailEntities())
             for (StockEntity st : loc.getStock())
-                st.setQuantity(st.getQuantity() - orderDetailEntity.getQuantity());
+                if (st.getStockID().getProduct().equals(orderDetailEntity.getOrderDetailId().getProduct()))
+                    st.setQuantity(st.getQuantity() - orderDetailEntity.getQuantity());
         return true;
     }
 
