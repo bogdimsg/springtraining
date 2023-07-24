@@ -15,9 +15,9 @@ import java.util.Set;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class OrderEntity extends BaseEntity
 {
-    @OneToMany(mappedBy = "orderDId.orders")
-    private Set<OrderDetailEntity> orderD;
-    @ManyToOne
+    @OneToMany(mappedBy = "orderDetailId.orders")
+    private Set<OrderDetailEntity> orderDetailEntities;
+    @ManyToOne(cascade = CascadeType.ALL)
     private CustomerEntity customer;
     private LocalDateTime createdAt;
     // address

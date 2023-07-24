@@ -9,8 +9,7 @@ import ro.msg.learning.shop.entity.ids.StockID;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class StockEntity
 {
-    private int quantity;
-
     @EmbeddedId
     private StockID stockID;
+    private int quantity;
 }

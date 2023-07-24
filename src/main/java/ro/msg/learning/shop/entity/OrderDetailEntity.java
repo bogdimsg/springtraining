@@ -1,9 +1,6 @@
 package ro.msg.learning.shop.entity;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,8 +12,8 @@ import ro.msg.learning.shop.entity.ids.OrderDetailID;
 public class OrderDetailEntity
 {
     @EmbeddedId
-    private OrderDetailID orderDId;
-    @ManyToOne
+    private OrderDetailID orderDetailId;
+    @ManyToOne(cascade = CascadeType.ALL)
     private LocationEntity shippedFrom;
     private int quantity;
 }

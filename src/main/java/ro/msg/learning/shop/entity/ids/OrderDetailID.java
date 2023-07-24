@@ -1,6 +1,7 @@
 // Order Detail ID
 package ro.msg.learning.shop.entity.ids;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
@@ -11,8 +12,8 @@ import ro.msg.learning.shop.entity.ProductEntity;
 @Embeddable
 public class OrderDetailID
 {
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private OrderEntity orders;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private ProductEntity product;
 }

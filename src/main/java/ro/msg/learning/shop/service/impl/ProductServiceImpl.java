@@ -2,19 +2,15 @@ package ro.msg.learning.shop.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ro.msg.learning.shop.dto.ProductAndCategoryDTO;
 import ro.msg.learning.shop.entity.ProductEntity;
-import ro.msg.learning.shop.repository.ProductCategoryRepository;
 import ro.msg.learning.shop.repository.ProductRepository;
-import ro.msg.learning.shop.service.ProductAndCategoryService;
+import ro.msg.learning.shop.service.ProductService;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 @Service
-public class ProductAndCategoryServiceImpl implements ProductAndCategoryService
+public class ProductServiceImpl implements ProductService
 {
     @Autowired
     private ProductRepository productRepo;

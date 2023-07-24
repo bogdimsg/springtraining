@@ -8,32 +8,36 @@ import org.mapstruct.factory.Mappers;
 import ro.msg.learning.shop.dto.OrderDTO;
 import ro.msg.learning.shop.entity.OrderDetailEntity;
 import ro.msg.learning.shop.entity.OrderEntity;
+import ro.msg.learning.shop.entity.ProductEntity;
 
 @Mapper
 public interface OrderMapper
 {
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
-    @Mapping(source = "oE.orderD.orderDId.product.id", target = "prodIDs")
-    @Mapping(source = "oE.orderD.quantity", target = "prodIDs")
-    @Mapping(source = "oE.createdAt", target = "createdAt")
-    @Mapping(source = "oE.country", target = "country")
-    @Mapping(source = "oE.city", target = "city")
-    @Mapping(source = "oE.county", target = "county")
-    @Mapping(source = "oE.street", target = "street")
-    OrderDTO toOrderDTO(OrderEntity oE);
+//    @Mapping(source = "productEntity.id", target = "productToQuantityMap")
+//    @Mapping(source = "orderEntity.orderDetailEntities.quantity", target = "productToQuantityMap")
+    @Mapping(source = "orderEntity.createdAt", target = "createdAt")
+    @Mapping(source = "orderEntity.country", target = "country")
+    @Mapping(source = "orderEntity.city", target = "city")
+    @Mapping(source = "orderEntity.county", target = "county")
+    @Mapping(source = "orderEntity.street", target = "street")
+    OrderDTO toOrderDTO(OrderEntity orderEntity, ProductEntity productEntity);
 
     @AfterMapping
-    default void idAfterMapping(OrderEntity orderEntity, @MappingTarget OrderDTO orderDTO)
+    default void idAfterMapping(OrderEntity orderEntity, ProductEntity productEntity, @MappingTarget OrderDTO orderDTO)
     {
-        orderDTO.getProdIDs().put(
-                orderEntity.getOrderD().forEach(
-                        (OrderDetailEntity orderDId) -> orderDId.getOrderDId().getOrders().getId()
-                ),
-
-                orderEntity.getOrderD().forEach()
+        orderDTO.getProductToQuantityMap().put(
+                productEntity.getId(),
+                orderEntity.getOrderDetailEntities().stream().findAny().get().getQuantity()
         );
     }
 
-    OrderEntity toOrderEntity(OrderDTO oD);
+    OrderEntity toOrderEntity(OrderDTO orderDTO);
+
+    @AfterMapping
+    default void mapAfterMapping(OrderDTO orderDTO, @MappingTarget OrderEntity orderEntity)
+    {
+        orderEntity.getOrderDetailEntities().add((OrderDetailEntity) orderDTO.getProductToQuantityMap());
+    }
 }

@@ -11,9 +11,8 @@ import java.util.UUID;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class OrderDTO
 {
-    // from OrderDetails
-    private Map<UUID, Integer> prodIDs; // the integer is the QUANTITY and the value part
-//    private int quantity;
+    // UUID from OrderDetails, Integer for quantity
+    private Map<UUID, Integer> productToQuantityMap;
     private LocalDateTime createdAt;
     // delivery address
     private String country;

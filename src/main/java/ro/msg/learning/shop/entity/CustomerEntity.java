@@ -15,7 +15,7 @@ import java.util.Set;
 public class CustomerEntity extends BaseEntity
 {
     @OneToMany(mappedBy = "customer")
-    private Set<OrderEntity> orderE;
+    private Set<OrderEntity> orderEntities;
     private String firstName;
     private String lastName;
     private String username;

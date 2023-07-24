@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 @Data @NoArgsConstructor @AllArgsConstructor
-public class ProductAndCategoryDTO
+public class ProductDTO
 {
     // IDs
     private UUID productID;

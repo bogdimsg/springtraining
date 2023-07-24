@@ -15,13 +15,13 @@ public class ProductEntity extends BaseEntity implements Serializable
 {
     @OneToMany(mappedBy = "stockID.product")
     private Set<StockEntity> stock;
-    @OneToMany(mappedBy = "orderDId.product")
-    private Set<OrderDetailEntity> orderD;
+    @OneToMany(mappedBy = "orderDetailId.product")
+    private Set<OrderDetailEntity> orderDetailEntities;
     private String name;
     private String description;
     private BigDecimal price;
     private double weight;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private ProductCategoryEntity category;
     private String imageURL;
 
