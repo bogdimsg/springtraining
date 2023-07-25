@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.msg.learning.shop.dto.OrderDTO;
+import ro.msg.learning.shop.entity.LocationEntity;
+import ro.msg.learning.shop.entity.OrderDetailEntity;
 import ro.msg.learning.shop.entity.OrderEntity;
 import ro.msg.learning.shop.mapper.OrderMapper;
 import ro.msg.learning.shop.service.OrderService;
@@ -24,10 +26,15 @@ public class OrderController
     private ProductServiceImpl product;
 
     @PostMapping
-    public ResponseEntity<Object> createOrder(@RequestBody OrderDTO orderDTO)
+    public ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO orderDTO)
     {
-        orderService.createOrder(OrderMapper.INSTANCE.toOrderEntity(orderDTO));
-        return new ResponseEntity<>("Order is created successfully", HttpStatus.CREATED);
+        OrderEntity order = OrderMapper.INSTANCE.toOrderEntity(orderDTO);
+        LocationEntity location = orderService.findSingleLocation(order, orderDTO.getProductToQuantityMap());
+        OrderEntity newOrder = orderService.createOrder(order, orderDTO.getProductToQuantityMap(), location);
+        return new ResponseEntity<>(OrderMapper.INSTANCE.toOrderDTOWithMap(newOrder, orderDTO.getProductToQuantityMap()), HttpStatus.CREATED);
+
+//        OrderEntity orderEntity = orderService.createOrder(OrderMapper.INSTANCE.toOrderEntity(orderDTO));
+//        return new ResponseEntity<>(OrderMapper.INSTANCE.toOrderDTO(orderEntity, orderEntity.getOrderDetailEntities().stream().findAny().get().getOrderDetailId().getProduct()), HttpStatus.CREATED);
     }
 
     @GetMapping(value = {"/{id}", "/get/{id}"})

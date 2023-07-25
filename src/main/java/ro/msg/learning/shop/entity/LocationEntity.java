@@ -1,24 +1,32 @@
 package ro.msg.learning.shop.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "locations")
-@Data @NoArgsConstructor @AllArgsConstructor
-public class LocationEntity extends BaseEntity implements Serializable
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class LocationEntity extends BaseEntity
 {
-    @OneToMany(mappedBy = "stockID.location")
-    private Set<StockEntity> stock;
+    @OneToMany(mappedBy = "stockID.location", cascade = CascadeType.ALL)
+    private List<StockEntity> stock = new ArrayList<>();
+
     @OneToMany(mappedBy = "shippedFrom")
     private Set<OrderDetailEntity> orderD;
+
     private String name;
     // address
     private String country;
@@ -26,12 +34,9 @@ public class LocationEntity extends BaseEntity implements Serializable
     private String county;
     private String street;
 
-    public LocationEntity(String name, String country, String city, String county, String street)
+    public void addStock(final StockEntity stockEntity)
     {
-        this.name = name;
-        this.country = country;
-        this.city = city;
-        this.county = county;
-        this.street = street;
+        stock.add(stockEntity);
+        stockEntity.getStockID().setLocation(this);
     }
 }
