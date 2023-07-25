@@ -9,6 +9,6 @@ public class AppController
     @GetMapping("/")
     public String index()
     {
-        return "yo";
+        return "<b>yo</b> yo";
     }
 }
