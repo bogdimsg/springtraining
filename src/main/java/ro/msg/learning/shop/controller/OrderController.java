@@ -29,8 +29,7 @@ public class OrderController
     public ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO orderDTO)
     {
         OrderEntity order = OrderMapper.INSTANCE.toOrderEntity(orderDTO);
-        LocationEntity location = orderService.findSingleLocation(order, orderDTO.getProductToQuantityMap());
-        OrderEntity newOrder = orderService.createOrder(order, orderDTO.getProductToQuantityMap(), location);
+        OrderEntity newOrder = orderService.createOrder(order, orderDTO.getProductToQuantityMap());
         return new ResponseEntity<>(OrderMapper.INSTANCE.toOrderDTOWithMap(newOrder, orderDTO.getProductToQuantityMap()), HttpStatus.CREATED);
 
 //        OrderEntity orderEntity = orderService.createOrder(OrderMapper.INSTANCE.toOrderEntity(orderDTO));
